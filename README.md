@@ -1,4 +1,4 @@
-# news app
+# Flut News
 
 <!-- ![Flutter news app by vendz](https://i.imgur.com/OEf05lU.gif) -->
 
