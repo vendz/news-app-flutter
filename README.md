@@ -23,3 +23,6 @@ flutter run
 ### This app is made using:
 - [Dailyhunt API](https://github.com/vendz/dailyhunt-api)
 - [Inshorts API](https://github.com/vendz/inshorts-api)
+---
+
+**Download the APK from `releases tab`**
