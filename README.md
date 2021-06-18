@@ -1,16 +1,25 @@
-# news_app
+# news app
 
-A new Flutter project.
+<!-- ![Flutter news app by vendz](https://i.imgur.com/OEf05lU.gif) -->
 
-## Getting Started
+<p align="center"><img src="https://i.imgur.com/OEf05lU.gif"></p>
 
-This project is a starting point for a Flutter application.
+| Main Screen | Content Screen | Category Screen |
+|-------------|----------------| ----------------|
+| ![vendz](https://i.imgur.com/k6phRuz.png) | ![vendz](https://i.imgur.com/BAa2d3R.png) | ![vendz](https://i.imgur.com/C4FBlTl.png) |
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Installation
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter pub get
+```
+### Usage 
+
+```
+flutter run
+```
+
+### This app is made using:
+- [Dailyhunt API](https://github.com/vendz/dailyhunt-api)
+- [Inshorts API](https://github.com/vendz/inshorts-api)
