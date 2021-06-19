@@ -32,7 +32,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Inquirer'),
+            Text('Flut'),
             Text(
               'News',
               style: TextStyle(color: Colors.blue),

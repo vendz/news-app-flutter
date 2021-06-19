@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Inquirer'),
+            Text('Flut'),
             Text(
               'News',
               style: TextStyle(color: Colors.blue),

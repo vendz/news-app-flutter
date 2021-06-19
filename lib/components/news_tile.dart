@@ -46,7 +46,6 @@ class NewsTile extends StatelessWidget {
               ),
               Text(
                 title,
-                maxLines: 2,
                 style: TextStyle(
                     color: Colors.black87,
                     fontSize: 20,
