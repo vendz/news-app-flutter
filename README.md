@@ -25,4 +25,4 @@ flutter run
 - [Inshorts API](https://github.com/vendz/inshorts-api)
 ---
 
-**Download the APK from `releases tab`**
+**Download the APK from [releases tab](https://github.com/vendz/news-app-flutter/releases)**
