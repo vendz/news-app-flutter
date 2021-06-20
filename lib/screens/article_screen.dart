@@ -14,6 +14,7 @@ class ArticleScreen extends StatefulWidget {
 class _ArticleScreenState extends State<ArticleScreen> {
   final Completer<WebViewController> _completer =
       Completer<WebViewController>();
+  int position = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +45,30 @@ class _ArticleScreenState extends State<ArticleScreen> {
           ],
         ),
       ),
-      body: Container(
-        child: WebView(
-          initialUrl: widget.articleUrl,
-          javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: ((WebViewController webViewController) {
-            _completer.complete(webViewController);
-          }),
-        ),
+      body: IndexedStack(
+        index: position,
+        children: [
+          WebView(
+            initialUrl: widget.articleUrl,
+            javascriptMode: JavascriptMode.unrestricted,
+            onPageStarted: (value) {
+              setState(() {
+                position = 1;
+              });
+            },
+            onPageFinished: (value) {
+              setState(() {
+                position = 0;
+              });
+            },
+            onWebViewCreated: ((WebViewController webViewController) {
+              _completer.complete(webViewController);
+            }),
+          ),
+          Container(
+            child: Center(child: CircularProgressIndicator()),
+          ),
+        ],
       ),
     );
   }
