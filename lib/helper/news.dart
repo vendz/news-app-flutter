@@ -49,7 +49,9 @@ class News {
 
         if (jsonData['success'] == true) {
           jsonData['data'].forEach((element) {
-            if (element['imageUrl'] != "" && element['content'] != "") {
+            if (element['imageUrl'] != "" &&
+                element['content'] != "" &&
+                element['read_more_url'] != null) {
               ArticleModel articleModel = ArticleModel(
                 publishedDate: element['date'].toString(),
                 publishedTime: element['time'].toString(),
