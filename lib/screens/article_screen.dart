@@ -25,18 +25,22 @@ class _ArticleScreenState extends State<ArticleScreen> {
             Navigator.pop(context);
           },
           icon: Icon(
-            Icons.arrow_back,
+            Icons.close,
             size: 30,
           ),
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Flut'),
+            Text(
+              'Flut',
+              style: TextStyle(color: Color(0xff50A3A4)),
+            ),
             Text(
               'News',
-              style: TextStyle(color: Colors.blue),
+              style: TextStyle(color: Color(0xffFCAF38)),
             ),
+            SizedBox(width: 40),
           ],
         ),
       ),
