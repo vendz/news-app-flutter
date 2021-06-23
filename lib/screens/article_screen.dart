@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -15,6 +16,37 @@ class _ArticleScreenState extends State<ArticleScreen> {
   final Completer<WebViewController> _completer =
       Completer<WebViewController>();
   int position = 1;
+  bool _showConnected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Connectivity().onConnectivityChanged.listen((event) {
+      checkConnectivity();
+    });
+  }
+
+  checkConnectivity() async {
+    var result = await Connectivity().checkConnectivity();
+    showConnectivitySnackBar(result);
+  }
+
+  void showConnectivitySnackBar(ConnectivityResult result) {
+    var isConnected = result != ConnectivityResult.none;
+    if (!isConnected) {
+      _showConnected = true;
+      final snackBar = SnackBar(
+          content: Text("You are Offline"), backgroundColor: Colors.red);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    if (isConnected && _showConnected) {
+      _showConnected = false;
+      final snackBar = SnackBar(
+          content: Text("You are back Online"), backgroundColor: Colors.green);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

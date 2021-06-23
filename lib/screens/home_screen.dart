@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/components/shimmer_news_tile.dart';
 import 'package:news_app/screens/category_screen.dart';
 import 'package:news_app/components/news_tile.dart';
 import 'package:news_app/helper/news.dart';
@@ -90,27 +91,32 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: _loading
-          ? Center(
-              child: Container(
-                child: CircularProgressIndicator(),
-              ),
+          ? ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) {
+                return ShimmerNewsTile();
+              },
             )
           : RefreshIndicator(
               child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: articles.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return NewsTile(
-                      image: articles[index].image,
-                      title: articles[index].title,
-                      content: articles[index].content,
-                      date: articles[index].publishedDate,
-                      views: articles[index].views,
-                      fullArticle: articles[index].fullArticle,
-                    );
-                  }),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemCount: articles.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return NewsTile(
+                    image: articles[index].image,
+                    title: articles[index].title,
+                    content: articles[index].content,
+                    date: articles[index].publishedDate,
+                    views: articles[index].views,
+                    fullArticle: articles[index].fullArticle,
+                  );
+                },
+              ),
               onRefresh: () => getNews(),
             ),
     );

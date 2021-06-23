@@ -58,7 +58,7 @@ class News {
                 image: element['img_url'].toString(),
                 content: element['content'].toString(),
                 fullArticle: element['read_more_url'].toString(),
-                views: "",
+                views: "", // empty string as inshorts doesn't provide views
                 title: element['title'].toString(),
               );
               news.add(articleModel);

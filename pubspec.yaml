@@ -15,6 +15,7 @@ dependencies:
   webview_flutter: ^2.0.8
   http: ^0.13.3
   connectivity_plus: ^1.0.3
+  shimmer: ^2.0.0
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
