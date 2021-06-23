@@ -53,18 +53,18 @@ class ShimmerNewsTile extends StatelessWidget {
               highlightColor: Colors.grey[100]!,
               child: Container(
                 height: 16,
-                width: (MediaQuery.of(context).size.width) / 4,
                 color: Colors.grey[300],
               ),
             ),
             SizedBox(
-              height: 4,
+              height: 2,
             ),
             Shimmer.fromColors(
               baseColor: Colors.grey[300]!,
               highlightColor: Colors.grey[100]!,
               child: Container(
-                height: 10,
+                height: 16,
+                width: (MediaQuery.of(context).size.width) / 3,
                 color: Colors.grey[300],
               ),
             ),
@@ -79,7 +79,7 @@ class ShimmerNewsTile extends StatelessWidget {
                   highlightColor: Colors.grey[100]!,
                   child: Container(
                     height: 10,
-                    width: 10,
+                    width: 30,
                     color: Colors.grey[300],
                   ),
                 ),
@@ -88,7 +88,7 @@ class ShimmerNewsTile extends StatelessWidget {
                   highlightColor: Colors.grey[100]!,
                   child: Container(
                     height: 10,
-                    width: 10,
+                    width: 20,
                     color: Colors.grey[300],
                   ),
                 ),
