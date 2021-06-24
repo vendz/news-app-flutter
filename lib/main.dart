@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.id: (context) => HomeScreen(category: 'all'),
         ArticleScreen.id: (context) => ArticleScreen(articleUrl: ''),
-        CategoryScreen.id: (context) => CategoryScreen(),
+        CategoryScreen.id: (context) => CategoryScreen(category: 'all'),
       },
     );
   }

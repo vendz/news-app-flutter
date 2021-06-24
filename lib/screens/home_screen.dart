@@ -68,7 +68,13 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, CategoryScreen.id);
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (contxt) => CategoryScreen(category: widget.category),
+              ),
+            );
           },
           icon: Icon(
             Icons.amp_stories_outlined,

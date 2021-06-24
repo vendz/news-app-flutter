@@ -7,6 +7,8 @@ import 'package:news_app/screens/home_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
   static const String id = 'category_screen';
+  final String category;
+  CategoryScreen({required this.category});
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -55,6 +57,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (contxt) => HomeScreen(category: widget.category),
+              ),
+            );
           },
           icon: Icon(
             Icons.arrow_back,
@@ -76,11 +84,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 text: categories[index].categoryName,
               ),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (contxt) =>
-                            HomeScreen(category: categories[index].category)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (contxt) =>
+                        HomeScreen(category: categories[index].category),
+                  ),
+                );
               },
             );
           },
