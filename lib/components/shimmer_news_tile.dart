@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:hive/hive.dart';
 
-class ShimmerNewsTile extends StatelessWidget {
+class ShimmerNewsTile extends StatefulWidget {
+  @override
+  _ShimmerNewsTileState createState() => _ShimmerNewsTileState();
+}
+
+class _ShimmerNewsTileState extends State<ShimmerNewsTile> {
+  bool isLightTheme = true;
+  Color baseColor = Colors.grey[300]!;
+  Color highlightColor = Colors.grey[100]!;
+
+  @override
+  void initState() {
+    super.initState();
+    getTheme();
+  }
+
+  getTheme() async {
+    final settings = await Hive.openBox('settings');
+    setState(() {
+      isLightTheme = settings.get('isLightTheme');
+      baseColor = isLightTheme ? Colors.grey[300]! : Color(0xff2c2c2c);
+      highlightColor = isLightTheme ? Colors.grey[100]! : Color(0xff373737);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(6))),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ),
       margin: EdgeInsets.only(bottom: 24),
       width: MediaQuery.of(context).size.width,
       child: Container(
@@ -23,8 +51,8 @@ class ShimmerNewsTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
+              baseColor: baseColor,
+              highlightColor: highlightColor,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
@@ -38,8 +66,8 @@ class ShimmerNewsTile extends StatelessWidget {
               height: 12,
             ),
             Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
+              baseColor: baseColor,
+              highlightColor: highlightColor,
               child: Container(
                 height: 16,
                 color: Colors.grey[300],
@@ -49,8 +77,8 @@ class ShimmerNewsTile extends StatelessWidget {
               height: 2,
             ),
             Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
+              baseColor: baseColor,
+              highlightColor: highlightColor,
               child: Container(
                 height: 16,
                 color: Colors.grey[300],
@@ -60,8 +88,8 @@ class ShimmerNewsTile extends StatelessWidget {
               height: 2,
             ),
             Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
+              baseColor: baseColor,
+              highlightColor: highlightColor,
               child: Container(
                 height: 16,
                 width: (MediaQuery.of(context).size.width) / 3,
@@ -75,8 +103,8 @@ class ShimmerNewsTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.grey[100]!,
+                  baseColor: baseColor,
+                  highlightColor: highlightColor,
                   child: Container(
                     height: 10,
                     width: 30,
@@ -84,8 +112,8 @@ class ShimmerNewsTile extends StatelessWidget {
                   ),
                 ),
                 Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.grey[100]!,
+                  baseColor: baseColor,
+                  highlightColor: highlightColor,
                   child: Container(
                     height: 10,
                     width: 20,

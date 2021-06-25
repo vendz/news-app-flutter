@@ -16,6 +16,9 @@ dependencies:
   http: ^0.13.3
   connectivity_plus: ^1.0.3
   shimmer: ^2.0.0
+  hive: ^2.0.4
+  provider: ^5.0.0
+  path_provider: ^2.0.2
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleScreen extends StatefulWidget {
-  static const String id = 'article_screen';
   final String articleUrl;
   ArticleScreen({required this.articleUrl});
 

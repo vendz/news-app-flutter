@@ -6,7 +6,6 @@ import 'package:news_app/models/category_model.dart';
 import 'package:news_app/screens/home_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
-  static const String id = 'category_screen';
   final String category;
   CategoryScreen({required this.category});
 

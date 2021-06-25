@@ -1,12 +1,14 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:news_app/components/shimmer_news_tile.dart';
+import 'package:news_app/provider/theme_provider.dart';
 import 'package:news_app/screens/category_screen.dart';
 import 'package:news_app/components/news_tile.dart';
 import 'package:news_app/helper/news.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String id = 'home_screen';
   final String category;
   HomeScreen({required this.category});
 
@@ -18,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List articles = [];
   bool _loading = true;
   bool _showConnected = false;
+  Icon themeIcon = Icon(Icons.dark_mode);
+  bool isLightTheme = true;
 
   @override
   void initState() {
@@ -27,6 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _loading = true;
     getNews();
+    getTheme();
+  }
+
+  getTheme() async {
+    final settings = await Hive.openBox('settings');
+    setState(() {
+      isLightTheme = settings.get('isLightTheme');
+      themeIcon = isLightTheme ? Icon(Icons.dark_mode) : Icon(Icons.light_mode);
+    });
   }
 
   checkConnectivity() async {
@@ -63,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -92,9 +106,19 @@ class _HomeScreenState extends State<HomeScreen> {
               'News',
               style: TextStyle(color: Color(0xffFCAF38)),
             ),
-            SizedBox(width: 40),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await themeProvider.toggleThemeData();
+              setState(() {
+                themeIcon = themeProvider.themeIcon();
+              });
+            },
+            icon: themeIcon,
+          ),
+        ],
       ),
       body: _loading
           ? ListView.builder(
