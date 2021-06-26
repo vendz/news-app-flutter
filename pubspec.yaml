@@ -31,3 +31,5 @@ flutter_launcher_name:
 
 flutter:
   uses-material-design: true
+  assets:
+    - images/
