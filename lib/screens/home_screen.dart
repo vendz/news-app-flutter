@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List articles = [];
   bool _loading = true;
   bool _showConnected = false;
+
   Icon themeIcon = Icon(Icons.dark_mode);
   bool isLightTheme = true;
 

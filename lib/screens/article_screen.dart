@@ -12,7 +12,7 @@ class ArticleScreen extends StatefulWidget {
 }
 
 class _ArticleScreenState extends State<ArticleScreen> {
-  final Completer<WebViewController> _completer =
+  final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   int position = 1;
   bool _showConnected = false;
@@ -93,7 +93,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
               });
             },
             onWebViewCreated: ((WebViewController webViewController) {
-              _completer.complete(webViewController);
+              _controller.complete(webViewController);
             }),
           ),
           Container(
