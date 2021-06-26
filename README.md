@@ -4,10 +4,13 @@
 
 <p align="center"><img src="https://i.imgur.com/OEf05lU.gif"></p>
 
-| Main Screen | Content Screen | Category Screen |
-|-------------|----------------| ----------------|
-| ![vendz](https://i.imgur.com/k6phRuz.png) | ![vendz](https://i.imgur.com/BAa2d3R.png) | ![vendz](https://i.imgur.com/C4FBlTl.png) |
+| Main Screen | Content Screen |
+|-------------|----------------|
+| ![vendz](https://i.imgur.com/Vwxpw6I.png) | ![vendz](https://i.imgur.com/Z7ivgQG.png) |
 
+| Category Screen | Dark Theme |
+| ---------------| ---------- |
+| ![](https://i.imgur.com/PpBe75T.png) | ![](https://i.imgur.com/PyoRwbZ.png) |
 
 ### Installation
 
