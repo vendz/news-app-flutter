@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/screens/article_screen.dart';
+import 'package:transition/transition.dart';
 
 class NewsTile extends StatelessWidget {
   final String image, title, content, date, views, fullArticle;
@@ -34,13 +36,20 @@ class NewsTile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Image.network(
-                    image,
+                borderRadius: BorderRadius.circular(6),
+                child: CachedNetworkImage(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                  imageUrl: image,
+                  placeholder: (context, url) => Image(
+                    image: AssetImage('images/dotted-placeholder.jpg'),
                     height: 200,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
-                  )),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 12,
               ),
@@ -55,7 +64,6 @@ class NewsTile extends StatelessWidget {
                 content,
                 maxLines: 2,
                 style: TextStyle(
-                  // color: isLightTheme ? Colors.black54 : Colors.white70,
                   fontSize: 14,
                 ),
               ),
@@ -88,9 +96,12 @@ class NewsTile extends StatelessWidget {
       ),
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ArticleScreen(articleUrl: fullArticle)));
+          context,
+          Transition(
+            child: ArticleScreen(articleUrl: fullArticle),
+            transitionEffect: TransitionEffect.BOTTOM_TO_TOP,
+          ),
+        );
       },
     );
   }

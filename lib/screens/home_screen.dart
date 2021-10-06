@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:news_app/components/shimmer_news_tile.dart';
 import 'package:news_app/provider/theme_provider.dart';
@@ -7,6 +8,8 @@ import 'package:news_app/screens/category_screen.dart';
 import 'package:news_app/components/news_tile.dart';
 import 'package:news_app/helper/news.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:transition/transition.dart';
 
 class HomeScreen extends StatefulWidget {
   final String category;
@@ -20,9 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
   List articles = [];
   bool _loading = true;
   bool _showConnected = false;
+  bool _articleExists = true;
+  bool _retryBtnDisabled = false;
 
   Icon themeIcon = Icon(Icons.dark_mode);
-  bool isLightTheme = true;
+  bool isLightTheme = false;
+
+  Color baseColor = Colors.grey[300]!;
+  Color highlightColor = Colors.grey[100]!;
 
   @override
   void initState() {
@@ -38,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
   getTheme() async {
     final settings = await Hive.openBox('settings');
     setState(() {
-      isLightTheme = settings.get('isLightTheme');
+      isLightTheme = settings.get('isLightTheme') ?? false;
+      baseColor = isLightTheme ? Colors.grey[300]! : Color(0xff2c2c2c);
+      highlightColor = isLightTheme ? Colors.grey[100]! : Color(0xff373737);
       themeIcon = isLightTheme ? Icon(Icons.dark_mode) : Icon(Icons.light_mode);
     });
   }
@@ -66,12 +76,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getNews() async {
+    _loading = true;
     checkConnectivity();
     News newsClass = News();
     await newsClass.getNews(category: widget.category);
     articles = newsClass.news;
     setState(() {
+      if (articles.isEmpty) {
+        _articleExists = false;
+      } else {
+        _articleExists = true;
+      }
       _loading = false;
+      _retryBtnDisabled = false;
     });
   }
 
@@ -80,14 +97,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle:
+            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (contxt) => CategoryScreen(category: widget.category),
+              Transition(
+                child: CategoryScreen(),
+                transitionEffect: TransitionEffect.LEFT_TO_RIGHT,
               ),
             );
           },
@@ -100,11 +120,11 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Flut',
+              'News',
               style: TextStyle(color: Color(0xff50A3A4)),
             ),
             Text(
-              'News',
+              'Wipe',
               style: TextStyle(color: Color(0xffFCAF38)),
             ),
           ],
@@ -122,34 +142,60 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: _loading
-          ? ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return ShimmerNewsTile();
-              },
-            )
-          : RefreshIndicator(
+          ? Shimmer.fromColors(
+              baseColor: baseColor,
+              highlightColor: highlightColor,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemCount: articles.length,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
-                  return NewsTile(
-                    image: articles[index].image,
-                    title: articles[index].title,
-                    content: articles[index].content,
-                    date: articles[index].publishedDate,
-                    views: articles[index].views,
-                    fullArticle: articles[index].fullArticle,
-                  );
+                  return ShimmerNewsTile();
                 },
               ),
-              onRefresh: () => getNews(),
-            ),
+            )
+          : _articleExists
+              ? RefreshIndicator(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: articles.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return NewsTile(
+                        image: articles[index].image,
+                        title: articles[index].title,
+                        content: articles[index].content,
+                        date: articles[index].publishedDate,
+                        views: articles[index].views,
+                        fullArticle: articles[index].fullArticle,
+                      );
+                    },
+                  ),
+                  onRefresh: () => getNews(),
+                )
+              : Container(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("No data available"),
+                        TextButton(
+                          child: Text('Retry Now!'),
+                          onPressed: () {
+                            if (!_articleExists) {
+                              setState(() {
+                                _retryBtnDisabled = true;
+                              });
+                              getNews();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
     );
   }
 }

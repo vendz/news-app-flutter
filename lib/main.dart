@@ -11,7 +11,7 @@ void main() async {
   Hive.init(appDirectory.path);
 
   final settings = await Hive.openBox('settings');
-  bool isLightTheme = settings.get('isLightTheme') ?? true;
+  bool isLightTheme = settings.get('isLightTheme') ?? false;
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(isLightTheme: isLightTheme),
@@ -26,9 +26,7 @@ class AppStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-    return MyApp(
-      themeProvider: themeProvider,
-    );
+    return MyApp(themeProvider: themeProvider);
   }
 }
 

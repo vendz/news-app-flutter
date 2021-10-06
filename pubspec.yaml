@@ -19,6 +19,7 @@ dependencies:
   hive: ^2.0.4
   provider: ^5.0.0
   path_provider: ^2.0.2
+  transition: ^2.0.2
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -27,7 +28,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter_launcher_name:
-  name: "Flut News"
+  name: "NewsWipe"
 
 flutter:
   uses-material-design: true

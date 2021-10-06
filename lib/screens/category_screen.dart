@@ -1,13 +1,14 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import 'package:news_app/components/category_card.dart';
 import 'package:news_app/helper/categoryData.dart';
 import 'package:news_app/models/category_model.dart';
 import 'package:news_app/screens/home_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
-  final String category;
-  CategoryScreen({required this.category});
+  CategoryScreen();
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -16,6 +17,7 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   List<CategoryModel> categories = [];
   bool _showConnected = false;
+  bool isLightTheme = false;
 
   @override
   void initState() {
@@ -23,6 +25,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
     categories = getCategories();
     Connectivity().onConnectivityChanged.listen((event) {
       checkConnectivity();
+    });
+    getTheme();
+  }
+
+  getTheme() async {
+    final settings = await Hive.openBox('settings');
+    setState(() {
+      isLightTheme = settings.get('isLightTheme') ?? false;
     });
   }
 
@@ -52,16 +62,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: isLightTheme
+            ? SystemUiOverlayStyle(statusBarColor: Colors.transparent)
+            : SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (contxt) => HomeScreen(category: widget.category),
-              ),
-            );
           },
           icon: Icon(
             Icons.arrow_back,

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleScreen extends StatefulWidget {
@@ -16,12 +18,21 @@ class _ArticleScreenState extends State<ArticleScreen> {
       Completer<WebViewController>();
   int position = 1;
   bool _showConnected = false;
+  bool isLightTheme = true;
 
   @override
   void initState() {
     super.initState();
     Connectivity().onConnectivityChanged.listen((event) {
       checkConnectivity();
+    });
+    getTheme();
+  }
+
+  getTheme() async {
+    final settings = await Hive.openBox('settings');
+    setState(() {
+      isLightTheme = settings.get('isLightTheme') ?? false;
     });
   }
 
@@ -51,6 +62,10 @@ class _ArticleScreenState extends State<ArticleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: isLightTheme
+            ? SystemUiOverlayStyle(statusBarColor: Colors.transparent)
+            : SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
@@ -65,11 +80,11 @@ class _ArticleScreenState extends State<ArticleScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Flut',
+              'News',
               style: TextStyle(color: Color(0xff50A3A4)),
             ),
             Text(
-              'News',
+              'Wipe',
               style: TextStyle(color: Color(0xffFCAF38)),
             ),
             SizedBox(width: 40),

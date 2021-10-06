@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:hive/hive.dart';
 
 class ShimmerNewsTile extends StatefulWidget {
   @override
@@ -15,16 +13,6 @@ class _ShimmerNewsTileState extends State<ShimmerNewsTile> {
   @override
   void initState() {
     super.initState();
-    getTheme();
-  }
-
-  getTheme() async {
-    final settings = await Hive.openBox('settings');
-    setState(() {
-      isLightTheme = settings.get('isLightTheme');
-      baseColor = isLightTheme ? Colors.grey[300]! : Color(0xff2c2c2c);
-      highlightColor = isLightTheme ? Colors.grey[100]! : Color(0xff373737);
-    });
   }
 
   @override
@@ -50,51 +38,35 @@ class _ShimmerNewsTileState extends State<ShimmerNewsTile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Shimmer.fromColors(
-              baseColor: baseColor,
-              highlightColor: highlightColor,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: Colors.grey[300],
-                ),
-                height: 200,
-                width: MediaQuery.of(context).size.width,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: Colors.grey[300],
               ),
+              height: 200,
+              width: MediaQuery.of(context).size.width,
             ),
             SizedBox(
               height: 12,
             ),
-            Shimmer.fromColors(
-              baseColor: baseColor,
-              highlightColor: highlightColor,
-              child: Container(
-                height: 16,
-                color: Colors.grey[300],
-              ),
+            Container(
+              height: 16,
+              color: Colors.grey[300],
             ),
             SizedBox(
               height: 2,
             ),
-            Shimmer.fromColors(
-              baseColor: baseColor,
-              highlightColor: highlightColor,
-              child: Container(
-                height: 16,
-                color: Colors.grey[300],
-              ),
+            Container(
+              height: 16,
+              color: Colors.grey[300],
             ),
             SizedBox(
               height: 2,
             ),
-            Shimmer.fromColors(
-              baseColor: baseColor,
-              highlightColor: highlightColor,
-              child: Container(
-                height: 16,
-                width: (MediaQuery.of(context).size.width) / 3,
-                color: Colors.grey[300],
-              ),
+            Container(
+              height: 16,
+              width: (MediaQuery.of(context).size.width) / 3,
+              color: Colors.grey[300],
             ),
             SizedBox(
               height: 4,
@@ -102,23 +74,15 @@ class _ShimmerNewsTileState extends State<ShimmerNewsTile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Shimmer.fromColors(
-                  baseColor: baseColor,
-                  highlightColor: highlightColor,
-                  child: Container(
-                    height: 10,
-                    width: 30,
-                    color: Colors.grey[300],
-                  ),
+                Container(
+                  height: 10,
+                  width: 30,
+                  color: Colors.grey[300],
                 ),
-                Shimmer.fromColors(
-                  baseColor: baseColor,
-                  highlightColor: highlightColor,
-                  child: Container(
-                    height: 10,
-                    width: 20,
-                    color: Colors.grey[300],
-                  ),
+                Container(
+                  height: 10,
+                  width: 20,
+                  color: Colors.grey[300],
                 ),
               ],
             )

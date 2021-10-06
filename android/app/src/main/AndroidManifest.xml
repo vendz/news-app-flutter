@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cf.vandit.news_app">
    <application
-        android:label="Flut News"
+        android:label="NewsWipe"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
