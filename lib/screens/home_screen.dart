@@ -80,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           backgroundColor: Colors.green);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      getNews();
     }
   }
 
