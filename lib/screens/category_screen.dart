@@ -6,6 +6,7 @@ import 'package:news_app/components/category_card.dart';
 import 'package:news_app/helper/categoryData.dart';
 import 'package:news_app/models/category_model.dart';
 import 'package:news_app/screens/home_screen.dart';
+import 'package:transition/transition.dart';
 
 class CategoryScreen extends StatefulWidget {
   CategoryScreen();
@@ -100,11 +101,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (contxt) =>
-                        HomeScreen(category: categories[index].category),
+                  Transition(
+                    child: HomeScreen(category: categories[index].category),
+                    transitionEffect: TransitionEffect.RIGHT_TO_LEFT,
                   ),
                 );
               },

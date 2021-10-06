@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 
 class ImageScreen extends StatefulWidget {
@@ -83,24 +82,21 @@ class _ImageScreenState extends State<ImageScreen> {
         ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Center(
-              child: Expanded(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: InteractiveViewer(
-                    child: Hero(
-                      tag: 'image-${widget.imageUrl}',
-                      child: CachedNetworkImage(
-                        imageUrl: widget.imageUrl,
-                      ),
-                    ),
-                    transformationController: controller,
-                    maxScale: 2,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: InteractiveViewer(
+                child: Hero(
+                  tag: 'image-${widget.imageUrl}',
+                  child: CachedNetworkImage(
+                    imageUrl: widget.imageUrl,
                   ),
                 ),
+                transformationController: controller,
+                maxScale: 2,
               ),
             ),
           ),
