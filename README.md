@@ -1,6 +1,6 @@
-# Flut News
+# NewsWipe
 
-<!-- ![Flutter news app by vendz](https://i.imgur.com/OEf05lU.gif) -->
+<!-- ![Flutter news app by vandit](https://i.imgur.com/OEf05lU.gif) -->
 
 <p align="center"><img src="https://i.imgur.com/OEf05lU.gif"></p>
 
