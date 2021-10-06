@@ -63,14 +63,22 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!isConnected) {
       _showConnected = true;
       final snackBar = SnackBar(
-          content: Text("You are Offline"), backgroundColor: Colors.red);
+          content: Text(
+            "You are Offline",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
     if (isConnected && _showConnected) {
       _showConnected = false;
       final snackBar = SnackBar(
-          content: Text("You are back Online"), backgroundColor: Colors.green);
+          content: Text(
+            "You are back Online",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }

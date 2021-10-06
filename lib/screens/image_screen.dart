@@ -1,22 +1,20 @@
-import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-class ArticleScreen extends StatefulWidget {
-  final String articleUrl;
-  ArticleScreen({required this.articleUrl});
+class ImageScreen extends StatefulWidget {
+  final String imageUrl;
+  final String headline;
+  ImageScreen({required this.imageUrl, required this.headline});
 
   @override
-  _ArticleScreenState createState() => _ArticleScreenState();
+  _ImageScreenState createState() => _ImageScreenState();
 }
 
-class _ArticleScreenState extends State<ArticleScreen> {
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
-  int position = 1;
+class _ImageScreenState extends State<ImageScreen> {
+  final controller = TransformationController();
   bool _showConnected = false;
   bool isLightTheme = true;
 
@@ -69,10 +67,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF222222),
       appBar: AppBar(
-        systemOverlayStyle: isLightTheme
-            ? SystemUiOverlayStyle(statusBarColor: Colors.transparent)
-            : SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
@@ -82,45 +78,40 @@ class _ArticleScreenState extends State<ArticleScreen> {
           icon: Icon(
             Icons.close,
             size: 30,
+            color: Colors.white,
           ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'News',
-              style: TextStyle(color: Color(0xff50A3A4)),
-            ),
-            Text(
-              'Wipe',
-              style: TextStyle(color: Color(0xffFCAF38)),
-            ),
-            SizedBox(width: 40),
-          ],
         ),
       ),
-      body: IndexedStack(
-        index: position,
+      body: Column(
         children: [
-          WebView(
-            initialUrl: widget.articleUrl,
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageStarted: (value) {
-              setState(() {
-                position = 1;
-              });
-            },
-            onPageFinished: (value) {
-              setState(() {
-                position = 0;
-              });
-            },
-            onWebViewCreated: ((WebViewController webViewController) {
-              _controller.complete(webViewController);
-            }),
+          Expanded(
+            child: Center(
+              child: Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: InteractiveViewer(
+                    child: Hero(
+                      tag: 'image-${widget.imageUrl}',
+                      child: CachedNetworkImage(
+                        imageUrl: widget.imageUrl,
+                      ),
+                    ),
+                    transformationController: controller,
+                    maxScale: 2,
+                  ),
+                ),
+              ),
+            ),
           ),
-          Container(
-            child: Center(child: CircularProgressIndicator()),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              widget.headline,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
