@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "cf.vandit.news_app"
+        applicationId "com.vandit.newswipe"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
