@@ -3,7 +3,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:news_app/helper/menu_items.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ArticleScreen extends StatefulWidget {
   final String articleUrl;
@@ -95,9 +99,22 @@ class _ArticleScreenState extends State<ArticleScreen> {
               'Wipe',
               style: TextStyle(color: Color(0xffFCAF38)),
             ),
-            SizedBox(width: 40),
+            SizedBox(width: 20),
           ],
         ),
+        actions: <Widget>[
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return MenuItems.choices.map((String choice) {
+                return PopupMenuItem(
+                  child: Text(choice),
+                  value: choice,
+                );
+              }).toList();
+            },
+            onSelected: choiceAction,
+          )
+        ],
       ),
       body: IndexedStack(
         index: position,
@@ -125,5 +142,22 @@ class _ArticleScreenState extends State<ArticleScreen> {
         ],
       ),
     );
+  }
+
+  void choiceAction(String choice) {
+    if (choice == MenuItems.Copy) {
+      Clipboard.setData(ClipboardData(text: widget.articleUrl));
+      Fluttertoast.showToast(
+        msg: "Link Copied",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        fontSize: 16.0,
+      );
+    } else if (choice == MenuItems.Open_In_Browser) {
+      launch(widget.articleUrl);
+    } else if (choice == MenuItems.Share) {
+      Share.share(widget.articleUrl);
+    }
   }
 }
