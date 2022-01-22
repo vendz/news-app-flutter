@@ -2,6 +2,8 @@
 
 <!-- ![Flutter news app by vandit](https://i.imgur.com/OEf05lU.gif) -->
 
+> NOTE:- Dailyhunt API is down and will be fixed soon
+
 <p align="center"><img src="https://i.imgur.com/OEf05lU.gif"></p>
 
 | Main Screen | Content Screen | Image View |
