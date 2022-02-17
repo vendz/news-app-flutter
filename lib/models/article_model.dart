@@ -5,7 +5,6 @@ class ArticleModel {
   String publishedTime;
   String publishedDate;
   String fullArticle;
-  String views;
 
   ArticleModel(
       {required this.content,
@@ -13,6 +12,5 @@ class ArticleModel {
       required this.image,
       required this.publishedDate,
       required this.publishedTime,
-      required this.title,
-      required this.views});
+      required this.title});
 }

@@ -177,7 +177,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: articles[index].title,
                         content: articles[index].content,
                         date: articles[index].publishedDate,
-                        views: articles[index].views,
                         fullArticle: articles[index].fullArticle,
                       );
                     },

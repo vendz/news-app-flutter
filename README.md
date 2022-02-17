@@ -2,8 +2,6 @@
 
 <!-- ![Flutter news app by vandit](https://i.imgur.com/OEf05lU.gif) -->
 
-> NOTE:- Dailyhunt API is down and will be fixed soon
-
 <p align="center"><img src="https://i.imgur.com/OEf05lU.gif"></p>
 
 | Main Screen | Content Screen | Image View |
@@ -26,7 +24,6 @@ flutter run
 ```
 
 ### This app is made using:
-- [Dailyhunt API](https://github.com/vendz/dailyhunt-api)
 - [Inshorts API](https://github.com/vendz/inshorts-api)
 ---
 

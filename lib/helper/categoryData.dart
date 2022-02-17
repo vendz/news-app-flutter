@@ -30,7 +30,7 @@ List<CategoryModel> getCategories() {
   categoryModel = new CategoryModel();
   categoryModel.categoryName = "India";
   categoryModel.imageAssetUrl = kIndiaImage;
-  categoryModel.category = 'india';
+  categoryModel.category = 'national';
   myCategories.add(categoryModel);
 
   //5
@@ -63,37 +63,37 @@ List<CategoryModel> getCategories() {
 
   //9
   categoryModel = new CategoryModel();
-  categoryModel.categoryName = "Lifestyle";
-  categoryModel.imageAssetUrl = kLifestyleImage;
-  categoryModel.category = 'lifestyle';
+  categoryModel.categoryName = "Business";
+  categoryModel.imageAssetUrl = kBusinessImage;
+  categoryModel.category = 'business';
   myCategories.add(categoryModel);
 
   //10
   categoryModel = new CategoryModel();
-  categoryModel.categoryName = "Employment";
-  categoryModel.imageAssetUrl = kEmploymentImage;
-  categoryModel.category = 'employment';
+  categoryModel.categoryName = "Politics";
+  categoryModel.imageAssetUrl = kPoliticsImage;
+  categoryModel.category = 'politics';
   myCategories.add(categoryModel);
 
   //11
   categoryModel = new CategoryModel();
-  categoryModel.categoryName = "Spirituality";
-  categoryModel.imageAssetUrl = kReligionImage;
-  categoryModel.category = 'religion';
+  categoryModel.categoryName = "Startup";
+  categoryModel.imageAssetUrl = kStartupImage;
+  categoryModel.category = 'startup';
   myCategories.add(categoryModel);
 
   //12
   categoryModel = new CategoryModel();
-  categoryModel.categoryName = "Football";
-  categoryModel.imageAssetUrl = kFootballImage;
-  categoryModel.category = 'football';
+  categoryModel.categoryName = "Something Different";
+  categoryModel.imageAssetUrl = kDifferentImage;
+  categoryModel.category = 'hatke';
   myCategories.add(categoryModel);
 
   //13
   categoryModel = new CategoryModel();
-  categoryModel.categoryName = "Movies";
-  categoryModel.imageAssetUrl = kMoviesImage;
-  categoryModel.category = 'movie';
+  categoryModel.categoryName = "Miscellaneous";
+  categoryModel.imageAssetUrl = kMiscellaneousImage;
+  categoryModel.category = 'miscellaneous';
   myCategories.add(categoryModel);
 
   return myCategories;

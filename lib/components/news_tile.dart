@@ -5,13 +5,12 @@ import 'package:news_app/screens/image_screen.dart';
 import 'package:transition/transition.dart';
 
 class NewsTile extends StatelessWidget {
-  final String image, title, content, date, views, fullArticle;
+  final String image, title, content, date, fullArticle;
   NewsTile({
     required this.content,
     required this.date,
     required this.image,
     required this.title,
-    required this.views,
     required this.fullArticle,
   });
 
@@ -93,27 +92,8 @@ class NewsTile extends StatelessWidget {
                     SizedBox(
                       height: 4,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(date,
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Colors.grey,
-                              size: 15.0,
-                            ),
-                            Text(
-                              views,
-                              style: TextStyle(color: Colors.grey),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                    Text(date,
+                        style: TextStyle(color: Colors.grey, fontSize: 12.0))
                   ],
                 ),
               ),
