@@ -23,8 +23,9 @@ flutter pub get
 flutter run
 ```
 
-### This app is made using:
+### This app is made using API's made by me:
 - [Inshorts API](https://github.com/vendz/inshorts-api)
+- [DailyHunt API](https://github.com/vendz/dailyhunt-api)
 ---
 
 **Download the APK from [releases tab](https://github.com/vendz/news-app-flutter/releases)**
